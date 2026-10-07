@@ -1,4 +1,4 @@
-This is a project that is being created for ProjectVIC.org
+This is a project that is being created for the non-profit ProjectVIC (website: projectvic.org)
 
 These games will be intigrated into their website as a resorce for law enforcment individuals. 
 This project is going to try and incorperate the following games:
@@ -25,7 +25,7 @@ Controls:
 	
 Checkers:
 Rules:
-	- Black pieces have the first move.
+	- Orange pieces have the first move. Blue pieces move second. 
 	- Pieces can only move forward to the square that is diagonal from where they are placed.
 	- Pieces can only move one square at a time.
 	- To capture an oponant's piece the player must hop over their oponant's piece if there is an empty square immediatly beyond the piece.
@@ -67,16 +67,23 @@ Controls:
 	
 Co-Op Puzzle Game (TBD):
 Rules:
+	- 2-4 Players Required
+	- Players will try to complete a series of puzzles to finish the level
 	- 
 
 Controls:
-	- 
+	- Use WASD of your arrow keys to move around
+	- Each player will be playing on different devices
 	
 Hole Game:
 Rules:
-	- 
+	- Move your hole and try to take the criminals off the street
+	- Listen to the neighbor watch and the hotline to point you in the right direction
+	- Gain points by catching the criminals
+	- Lose points when you catch an innocent 
 	
 Controls:
-	- 
+	- Use your mouse to move your hole around 
+	-? Use WASD to move the hole around 
 	
 	
