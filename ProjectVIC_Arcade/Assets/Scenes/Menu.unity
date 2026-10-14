@@ -309,7 +309,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ________
+  m_text: Checkers
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ________
+  m_text: Pong
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1078,7 +1078,7 @@ GameObject:
   - component: {fileID: 1257713058}
   - component: {fileID: 1257713057}
   m_Layer: 5
-  m_Name: __________Button
+  m_Name: checkersButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1150,7 +1150,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1131395869}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: startCheckers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1426,10 +1426,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 876480234}
-  - {fileID: 1661843407}
   - {fileID: 1257713056}
-  - {fileID: 2137361966}
   - {fileID: 9175174}
+  - {fileID: 2137361966}
+  - {fileID: 1661843407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1666,7 +1666,7 @@ GameObject:
   - component: {fileID: 2137361968}
   - component: {fileID: 2137361967}
   m_Layer: 5
-  m_Name: __________Button (1)
+  m_Name: pongButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1738,7 +1738,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1131395869}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: startPong
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
