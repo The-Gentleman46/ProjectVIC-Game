@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class snakeMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f;
+    private float speed = 2f;
     private Rigidbody2D rb;
-    private Vector2 movementDirection;
+    private Vector2 moveInput;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,12 +16,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        rb.linearVelocity = moveInput * speed;
     }
 
-    private void FixedUpdate()
+    public void Move(InputAction.CallbackContext context)
     {
-        rb.linearVelocity = movementDirection * speed;
+        moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
