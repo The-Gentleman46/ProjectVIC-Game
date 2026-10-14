@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class snakeMovement : MonoBehaviour
 {
-    private float speed = 2f;
+    private float speed = 3f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
