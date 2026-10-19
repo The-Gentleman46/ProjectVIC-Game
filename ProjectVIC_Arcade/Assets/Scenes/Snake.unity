@@ -1956,7 +1956,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.34, y: 0.34}
   m_EdgeRadius: 0
 --- !u!1 &813087092
 GameObject:
@@ -4625,6 +4625,93 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1470309762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1470309764}
+  - component: {fileID: 1470309763}
+  m_Layer: 0
+  m_Name: foodSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1470309763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470309762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d230a9bc80e3174478b160103e7c5bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::spawnFood
+  collectables:
+  - {fileID: 1202421650}
+  - {fileID: 1595109711}
+  - {fileID: 1522229971}
+  - {fileID: 403872612}
+  - {fileID: 468671355}
+  - {fileID: 446890800}
+  - {fileID: 1689239619}
+  - {fileID: 2143119424}
+  - {fileID: 1936077220}
+  - {fileID: 1296459884}
+  - {fileID: 1062084277}
+  - {fileID: 1629116835}
+  - {fileID: 38292208}
+  - {fileID: 1758082346}
+  - {fileID: 1168378976}
+  - {fileID: 1901987451}
+  - {fileID: 1840503529}
+  - {fileID: 262477108}
+  - {fileID: 892809795}
+  - {fileID: 1289351509}
+  - {fileID: 2080027031}
+  - {fileID: 813087092}
+  - {fileID: 439133127}
+  - {fileID: 1535891936}
+  - {fileID: 645697804}
+  - {fileID: 1138279120}
+  - {fileID: 9609891}
+  - {fileID: 1138642607}
+  - {fileID: 1540872737}
+  - {fileID: 1090408260}
+  - {fileID: 680914185}
+  - {fileID: 1948022667}
+  - {fileID: 1657856557}
+  - {fileID: 1688400218}
+  - {fileID: 126076562}
+  - {fileID: 1902435010}
+  - {fileID: 216424615}
+  minX: 0
+  maxX: 0
+  minY: 0
+  maxY: 0
+  numberOfCollectablesToSpawn: 5
+--- !u!4 &1470309764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470309762}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 634.6144, y: 528.9826, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1522229971
 GameObject:
   m_ObjectHideFlags: 0
@@ -11144,3 +11231,4 @@ SceneRoots:
   - {fileID: 186406477}
   - {fileID: 811905580}
   - {fileID: 1786253600}
+  - {fileID: 1470309764}

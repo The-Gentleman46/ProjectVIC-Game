@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class snakeMovement : MonoBehaviour
 {
@@ -20,27 +21,30 @@ public class snakeMovement : MonoBehaviour
     void Update()
     {
         rb.linearVelocity = moveInput * speed;
-
+        
         if (direction == Vector3.forward) { 
             rotationOffset = 0f;
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotationOffset));
-            transform.eulerAngles = new Vector3(0f, 0f, rotationOffset);
-
+            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            //transform.eulerAngles = new Vector3(0f, 0f, rotationOffset);
+            rb.MoveRotation(rotationOffset);
         }
         else if (direction == Vector3.back) {
             rotationOffset = 180f;
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotationOffset));
-            transform.eulerAngles = new Vector3(0f, 0f, rotationOffset);
+            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            //transform.eulerAngles = new Vector3(0f, 0f, rotationOffset);
+            rb.MoveRotation(rotationOffset);
         }
         else if (direction == Vector3.left) {
             rotationOffset = 90f;
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotationOffset));
-            transform.eulerAngles = new Vector3(0f, 0f, rotationOffset);
+            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            //transform.eulerAngles = new Vector3(0f, 0f, rotationOffset);
+            rb.MoveRotation(rotationOffset);
         }
         else if (direction == Vector3.right) {
             rotationOffset = -90f;
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotationOffset));
-            transform.eulerAngles = new Vector3(0f, 0f, rotationOffset);
+            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            //transform.eulerAngles = new Vector3(0f, 0f, rotationOffset);
+            rb.MoveRotation(rotationOffset);
         }
     }
 
@@ -55,12 +59,17 @@ public class snakeMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             Debug.Log("Collided with wall");
-            
+            Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Food"))
         {
             Debug.Log("Collided with food");
-            
+            Destroy(collision.gameObject);
         }
+    }
+
+    public void End()
+    {
+        SceneManager.LoadScene("gameOver");
     }
 }
