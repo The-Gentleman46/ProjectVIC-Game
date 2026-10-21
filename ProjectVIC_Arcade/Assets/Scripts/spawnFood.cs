@@ -10,6 +10,7 @@ public class spawnFood : MonoBehaviour
     public float maxY = 5f;
 
     public int numberOfCollectablesToSpawn = 5;
+    public int numberOfSpawned = 0;
     void Start()
     {
         spawnRandomCollectables();
@@ -31,6 +32,7 @@ public class spawnFood : MonoBehaviour
             float randomY = Random.Range(minY, maxY);
             Vector2 spawnPosition = new Vector2(randomX, randomY);
             Instantiate(collectableToSpawn, spawnPosition, Quaternion.identity);
+            numberOfSpawned++;
         }
     }
 }

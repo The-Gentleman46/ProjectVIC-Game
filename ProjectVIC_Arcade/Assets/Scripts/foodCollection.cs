@@ -3,12 +3,10 @@ using UnityEngine;
 public class foodCollection : MonoBehaviour
 {
     public int collectedFoodCount = 0;
-    public int totalFoodCount = 0;
-
 
     void Start()
     {
-        
+        collectedFoodCount = 0;
     }
 
     // Update is called once per frame
@@ -24,6 +22,7 @@ public class foodCollection : MonoBehaviour
             collectedFoodCount++;
             Destroy(other.gameObject);
             Debug.Log("Collected food: " + collectedFoodCount);
+            
             
         }
     }
