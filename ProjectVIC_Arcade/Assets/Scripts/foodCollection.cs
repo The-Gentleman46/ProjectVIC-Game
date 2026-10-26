@@ -23,7 +23,6 @@ public class foodCollection : MonoBehaviour
             Destroy(other.gameObject);
             Debug.Log("Collected food: " + collectedFoodCount);
             
-            
         }
     }
 }

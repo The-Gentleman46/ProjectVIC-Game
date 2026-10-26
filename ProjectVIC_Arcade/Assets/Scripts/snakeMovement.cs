@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class snakeMovement : MonoBehaviour
 {
     [SerializeField] private float rotationOffset;
+    [SerializeField] private spawnFood spawnFoodScript;
 
     private float speed = 3f;
     private Rigidbody2D rb;
@@ -78,15 +79,15 @@ public class snakeMovement : MonoBehaviour
         {
             moveInput = Vector2.right;
         }
-    }  
+    }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
             Debug.Log("Collided with wall");
             Destroy(gameObject);
-            End();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("gameOver");
         }
         else if (collision.gameObject.CompareTag("Food"))
         {
@@ -94,11 +95,27 @@ public class snakeMovement : MonoBehaviour
             Destroy(collision.gameObject);
             gameHandler.instance.addLength();
             gameHandler.instance.addScore();
+            spawnFoodScript.numberOfSpawned--;
         }
     }
 
-    public void End()
-    {
-        SceneManager.LoadScene("gameOver");
-    }
+
+    //public void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Wall"))
+    //    {
+    //        Debug.Log("Collided with wall");
+    //        Destroy(gameObject);
+    //        End();
+    //    }
+    //    else if (collision.gameObject.CompareTag("Food"))
+    //    {
+    //        Debug.Log("Collided with food");
+    //        Destroy(collision.gameObject);
+    //        gameHandler.instance.addLength();
+    //        gameHandler.instance.addScore();
+    //    }
+    //}
+
+    
 }
