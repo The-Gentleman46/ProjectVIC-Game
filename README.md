@@ -4,11 +4,12 @@ These games will be integrated into their website as a resource for law enforcem
 This project is going to try to incorporate the following games:
 - Pong (Single Player & Co-Op)
 - Checkers (Single Player & Co-Op)
-- Frogger (Single Player & Co-Op)
+- Frogger (Single Player)
 - Cybersweeper
 - Drawing
 - Co-Op Puzzle Game (Name TBD)
 - Hole Game 
+- Snake
 
 Rules of each Game as listed above:
 
@@ -41,11 +42,11 @@ Rules:
 	- Hop across the road avoiding the cars (DON'T GET SQUISHED)
 	- Next, hop across the creek by standing on the lilypads and logs
 	- Stay aware of any other animals that may be in the water. Alligators and snakes are looking to make you their next meal if you don't move fast.
-	- There will be 5 locations for you to hop into to complete the level, get 5 different frogs into their different locations and you will complete the level.
+	- There will be 5 locations for you to hop into to complete the level. Get 5 different frogs into their different locations, and you will complete the level.
 	
 Controls:
-	- Use the arrow keys or WASD to move you barrior up and down.
-	- If you are in multiplayer mode, Player 1 uses WASD and Player 2 uses the arrow keys.
+	- Use the arrow keys or WASD to move your barrier up and down.
+	- If you are in multiplayer mode, Player 1 uses WASD, and Player 2 uses the arrow keys.
 	
 Cybersweeper:
 Rules:
@@ -72,7 +73,7 @@ Rules:
 	- 
 
 Controls:
-	- Use WASD of your arrow keys to move around
+	- Use WASD or your arrow keys to move around
 	- Each player will be playing on different devices
 	
 Hole Game:
