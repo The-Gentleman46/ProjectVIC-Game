@@ -31,14 +31,4 @@ public class gameHandler : MonoBehaviour
     {
         Length++;
     }
-
-    public int getScore()
-    {
-        return currentScore;
-    }
-
-    public void addScore()
-    {
-        currentScore++;
-    }
 }

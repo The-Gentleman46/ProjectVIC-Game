@@ -81,6 +81,11 @@ public class snakeMovement : MonoBehaviour
         }
     }
 
+    private spawnFood GetSpawnFoodScript()
+    {
+        return spawnFoodScript;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
@@ -94,28 +99,7 @@ public class snakeMovement : MonoBehaviour
             Debug.Log("Collided with food");
             Destroy(collision.gameObject);
             gameHandler.instance.addLength();
-            gameHandler.instance.addScore();
             spawnFoodScript.numberOfSpawned--;
         }
     }
-
-
-    //public void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Wall"))
-    //    {
-    //        Debug.Log("Collided with wall");
-    //        Destroy(gameObject);
-    //        End();
-    //    }
-    //    else if (collision.gameObject.CompareTag("Food"))
-    //    {
-    //        Debug.Log("Collided with food");
-    //        Destroy(collision.gameObject);
-    //        gameHandler.instance.addLength();
-    //        gameHandler.instance.addScore();
-    //    }
-    //}
-
-    
 }

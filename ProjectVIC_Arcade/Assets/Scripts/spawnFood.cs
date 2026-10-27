@@ -20,21 +20,23 @@ public class spawnFood : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnRandomCollectables();
+        if (numberOfSpawned <= numberOfCollectablesToSpawn)
+        {
+            spawnRandomCollectables();
+        } else
+        {
+            Debug.Log("All collectables spawned");
+        }
     }
 
     void spawnRandomCollectables()
-    {
-        //if (numberOfSpawned <= numberOfCollectablesToSpawn)
-       // {   
-                int randomIndex = Random.Range(0, collectables.Length);
-                GameObject collectableToSpawn = collectables[randomIndex];
-                float randomX = Random.Range(minX, maxX);
-                float randomY = Random.Range(minY, maxY);
-                Vector2 spawnPosition = new Vector2(randomX, randomY);
-                Instantiate(collectableToSpawn, spawnPosition, Quaternion.identity);
-                numberOfSpawned++;
-            
-       // }
+    {     
+        int randomIndex = Random.Range(0, collectables.Length);
+        GameObject collectableToSpawn = collectables[randomIndex];
+        float randomX = Random.Range(minX, maxX);
+        float randomY = Random.Range(minY, maxY);
+        Vector2 spawnPosition = new Vector2(randomX, randomY);
+        Instantiate(collectableToSpawn, spawnPosition, Quaternion.identity);
+        numberOfSpawned++;
     }
 }
