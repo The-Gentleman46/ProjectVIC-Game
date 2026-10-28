@@ -3,8 +3,7 @@ using UnityEngine;
 public class gameHandler : MonoBehaviour
 {
     public static gameHandler instance { get; private set; }
-
-    private int Length = 1;
+ 
 
     private void Awake()
     {
@@ -19,15 +18,5 @@ public class gameHandler : MonoBehaviour
         }
     }
 
-    public int getLength()
-    {
-        return Length;
-    }
-
-    public void addLength()
-    {
-        Length++;
-
-
-    }
+    
 }

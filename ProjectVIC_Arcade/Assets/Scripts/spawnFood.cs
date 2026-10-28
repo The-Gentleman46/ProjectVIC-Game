@@ -20,13 +20,14 @@ public class spawnFood : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (numberOfSpawned <= numberOfCollectablesToSpawn)
         {
             spawnRandomCollectables();
         }
         else
         {
-            Debug.Log("All collectables spawned");
+            //Debug.Log("All collectables spawned");
         }
     }
 
