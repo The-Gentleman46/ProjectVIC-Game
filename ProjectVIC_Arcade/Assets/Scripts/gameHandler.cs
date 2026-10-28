@@ -4,9 +4,6 @@ public class gameHandler : MonoBehaviour
 {
     public static gameHandler instance { get; private set; }
 
-    [SerializeField] private Vector2 gridsize = new(20, 20);
-
-    private int currentScore = 0;
     private int Length = 1;
 
     private void Awake()
@@ -30,5 +27,7 @@ public class gameHandler : MonoBehaviour
     public void addLength()
     {
         Length++;
+
+
     }
 }

@@ -23,7 +23,8 @@ public class spawnFood : MonoBehaviour
         if (numberOfSpawned <= numberOfCollectablesToSpawn)
         {
             spawnRandomCollectables();
-        } else
+        }
+        else
         {
             Debug.Log("All collectables spawned");
         }

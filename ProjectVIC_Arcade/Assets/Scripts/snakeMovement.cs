@@ -101,5 +101,11 @@ public class snakeMovement : MonoBehaviour
             gameHandler.instance.addLength();
             spawnFoodScript.numberOfSpawned--;
         }
+        else if (collision.gameObject.CompareTag("Body"))
+        {
+            Debug.Log("Collided with self");
+            Destroy(gameObject);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("gameOver");
+        }
     }
 }
