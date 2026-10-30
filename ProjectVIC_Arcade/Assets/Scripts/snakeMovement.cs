@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using System.Linq;
 
 public class snakeMovement : MonoBehaviour
 {
@@ -11,11 +12,14 @@ public class snakeMovement : MonoBehaviour
     [SerializeField] GameObject snakeBody;
     [SerializeField] GameObject snakeHead;
     [SerializeField] List<Transform> segments = new List<Transform>();
+    private Queue<Vector2> positionHistory = new Queue<Vector2>();
+    private float movementCooldown = 0.3f; // Adjust for speed
+    private float timeSinceLastMove = 0f;
     private int initialLength = 3;
-    private float speed = 0.5f;
+    private float speed = 2f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    private Vector3 direction = Vector3.up;
+    private Vector2 direction = Vector2.up;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,49 +37,80 @@ public class snakeMovement : MonoBehaviour
 
     void Update()
     {
-        rb.linearVelocity = moveInput * speed;
+        //rb.linearVelocity = moveInput * speed;
 
         // Move up
-        if (Input.GetKeyDown(KeyCode.W) && direction != Vector3.down)
+        if (Input.GetKeyDown(KeyCode.W) && direction != Vector2.down)
         {
-            direction = Vector3.forward;
+            direction = Vector2.up;
             moveInput = Vector2.up;
-            rotationOffset = 0f;
-            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
-            rb.MoveRotation(rotationOffset);
+            //rotationOffset = 0f;
+            //transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            //rb.MoveRotation(rotationOffset);
         }
         // Move down
-        if (Input.GetKeyDown(KeyCode.S) && direction != Vector3.up)
+        if (Input.GetKeyDown(KeyCode.S) && direction != Vector2.up)
         {
-            direction = Vector3.back;
+            direction = Vector2.down;
             moveInput = Vector2.down;
-            rotationOffset = 180f;
-            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
-            rb.MoveRotation(rotationOffset);
+            //rotationOffset = 180f;
+            //transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            //rb.MoveRotation(rotationOffset);
         }
         // Move left
-        if (Input.GetKeyDown(KeyCode.A) && direction != Vector3.right)
+        if (Input.GetKeyDown(KeyCode.A) && direction != Vector2.right)
         {
-            direction = Vector3.left;
+            direction = Vector2.left;
             moveInput = Vector2.left;
-            rotationOffset = 90f;
-            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
-            rb.MoveRotation(rotationOffset);
+            //rotationOffset = 90f;
+            //transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            //rb.MoveRotation(rotationOffset);
         }
         // Move right
-        if (Input.GetKeyDown(KeyCode.D) && direction != Vector3.left)
+        if (Input.GetKeyDown(KeyCode.D) && direction != Vector2.left)
         {
-            direction = Vector3.right;
+            direction = Vector2.right;
             moveInput = Vector2.right;
-            rotationOffset = -90f;
-            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
-            rb.MoveRotation(rotationOffset);
+            //rotationOffset = -90f;
+            //transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            //rb.MoveRotation(rotationOffset);
         }
     }
-
     private void FixedUpdate()
     {
-        Vector3 offset = new Vector3(0.5f, 0.5f, 0.0f);
+        timeSinceLastMove += Time.fixedDeltaTime;
+
+        // Move head in grid steps
+        if (timeSinceLastMove >= movementCooldown && moveInput != Vector2.zero)
+        {
+            transform.position = new Vector3(
+                Mathf.Round(transform.position.x + direction.x),
+                Mathf.Round(transform.position.y + direction.y),
+                0.0f
+            );
+
+            positionHistory.Enqueue(transform.position);
+            timeSinceLastMove = 0f;
+        }
+
+        // Body segments follow the position history
+        for (int i = 1; i < segments.Count; i++)
+        {
+            if (positionHistory.Count > i - 1)
+            {
+                segments[i].position = positionHistory.ElementAt(i - 1);
+            }
+        }
+
+        // Remove old positions from history
+        if (positionHistory.Count > segments.Count)
+        {
+            positionHistory.Dequeue();
+        }
+    }
+    /*private void FixedUpdate()
+    {
+        Vector3 offset = new Vector3(0.5f, 0.0f, 0.0f);
 
         // Moves the player by 1 unit every movement cycle but collides with the wall almost immedietly due to how small the level is
         /*
@@ -83,17 +118,17 @@ public class snakeMovement : MonoBehaviour
             Mathf.Round(transform.position.x + direction.x),
             Mathf.Round(transform.position.y + direction.y),
             0.0f
-        );*/
+        );
 
         // Sets each segments position to that of the one in front of it to make it so they all follow each other
         for (int i = segments.Count - 1; i > 0; i--)
         {
-            segments[i].position = segments[i - 1].position;
+            segments[i].position = segments[i - 1].position + offset;
         }
         
         
         
-    }
+    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -123,7 +158,7 @@ public class snakeMovement : MonoBehaviour
         // Creates a new segment upon consumption of a fruit
         Transform newSegment = Instantiate(snakeBody.transform);
         // Sets the new position to that of the one in front of it (the * 2f at the end is me trying to make them more spaced apart)
-        newSegment.position = segments[segments.Count - 1].position - direction * 2f;
+        newSegment.position = segments[segments.Count - 1].position;
         // Add to the list of segments
         segments.Add(newSegment);
 
