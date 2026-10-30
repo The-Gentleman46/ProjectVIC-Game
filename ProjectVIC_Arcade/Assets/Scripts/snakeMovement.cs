@@ -19,6 +19,7 @@ public class snakeMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 direction = Vector2.up;
+    private bool canCollide = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,8 +37,6 @@ public class snakeMovement : MonoBehaviour
 
     void Update()
     {
-        //rb.linearVelocity = moveInput * speed;
-
         // Move up
         if (Input.GetKeyDown(KeyCode.W) && direction != Vector2.down)
         {
@@ -108,28 +107,15 @@ public class snakeMovement : MonoBehaviour
         }
 
     }
-    /*private void FixedUpdate()
+    
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        Vector3 offset = new Vector3(0.5f, 0.0f, 0.0f);
-
-        // Moves the player by 1 unit every movement cycle but collides with the wall almost immedietly due to how small the level is
-        /*
-        transform.position = new Vector3(
-            Mathf.Round(transform.position.x + direction.x),
-            Mathf.Round(transform.position.y + direction.y),
-            0.0f
-        );
-
-        // Sets each segments position to that of the one in front of it to make it so they all follow each other
-        for (int i = segments.Count - 1; i > 0; i--)
+        if (collision.gameObject.CompareTag("Body"))
         {
-            segments[i].position = segments[i - 1].position + offset;
+            canCollide = true;
         }
-        
-        
-        
-    }*/
-
+    }
+   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
@@ -145,15 +131,20 @@ public class snakeMovement : MonoBehaviour
             Destroy(collision.gameObject);
             // Remove occupied position from hashSet
             spawnFoodScript.OccPosition.Remove(collision.gameObject.transform.position);
+            // Add a segment
             Grow();
             spawnFoodScript.numberOfSpawned--;
         }
-        if (collision.gameObject.CompareTag("Body"))
+        if (canCollide)
         {
-            Debug.Log("Collided with self");
-            Destroy(gameObject);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("gameOver");
+            if (collision.gameObject.CompareTag("Body"))
+            {
+                Debug.Log("Collided with self");
+                Destroy(gameObject);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("gameOver");
+            }
         }
+
     }
 
     public void Grow()
@@ -161,7 +152,7 @@ public class snakeMovement : MonoBehaviour
         // Creates a new segment upon consumption of a fruit
         Transform newSegment = Instantiate(snakeBody.transform);
         // Sets the new position to that of the one in front of it (the * 2f at the end is me trying to make them more spaced apart)
-        newSegment.position = segments[segments.Count - 1].position;
+        newSegment.position = segments[0].position;
         // Add to the list of segments
         segments.Add(newSegment);
 
