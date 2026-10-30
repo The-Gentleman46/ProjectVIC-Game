@@ -11,12 +11,11 @@ public class snakeMovement : MonoBehaviour
     [SerializeField] private spawnFood spawnFoodScript;
     [SerializeField] GameObject snakeBody;
     [SerializeField] GameObject snakeHead;
-    [SerializeField] List<Transform> segments = new List<Transform>();
-    private Queue<Vector2> positionHistory = new Queue<Vector2>();
+    public List<Transform> segments = new List<Transform>();
+    public Queue<Vector2> positionHistory = new Queue<Vector2>();
     private float movementCooldown = 0.3f; // Adjust for speed
     private float timeSinceLastMove = 0f;
     private int initialLength = 3;
-    private float speed = 2f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 direction = Vector2.up;
@@ -44,8 +43,8 @@ public class snakeMovement : MonoBehaviour
         {
             direction = Vector2.up;
             moveInput = Vector2.up;
-            //rotationOffset = 0f;
-            //transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            rotationOffset = 0f;
+            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
             //rb.MoveRotation(rotationOffset);
         }
         // Move down
@@ -53,8 +52,8 @@ public class snakeMovement : MonoBehaviour
         {
             direction = Vector2.down;
             moveInput = Vector2.down;
-            //rotationOffset = 180f;
-            //transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            rotationOffset = 180f;
+            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
             //rb.MoveRotation(rotationOffset);
         }
         // Move left
@@ -62,8 +61,8 @@ public class snakeMovement : MonoBehaviour
         {
             direction = Vector2.left;
             moveInput = Vector2.left;
-            //rotationOffset = 90f;
-            //transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            rotationOffset = 90f;
+            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
             //rb.MoveRotation(rotationOffset);
         }
         // Move right
@@ -71,8 +70,8 @@ public class snakeMovement : MonoBehaviour
         {
             direction = Vector2.right;
             moveInput = Vector2.right;
-            //rotationOffset = -90f;
-            //transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
+            rotationOffset = -90f;
+            transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
             //rb.MoveRotation(rotationOffset);
         }
     }
@@ -107,6 +106,7 @@ public class snakeMovement : MonoBehaviour
         {
             positionHistory.Dequeue();
         }
+
     }
     /*private void FixedUpdate()
     {
@@ -141,7 +141,10 @@ public class snakeMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Food"))
         {
             Debug.Log("Collided with food");
+            // Destroy food
             Destroy(collision.gameObject);
+            // Remove occupied position from hashSet
+            spawnFoodScript.OccPosition.Remove(collision.gameObject.transform.position);
             Grow();
             spawnFoodScript.numberOfSpawned--;
         }
