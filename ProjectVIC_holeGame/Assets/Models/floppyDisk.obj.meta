@@ -7,8 +7,63 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mesh1311321326Mat
+    second: {fileID: 2100000, guid: ecace80bc9a24e445af1c8d4b2e9e8bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh148127374Mat
+    second: {fileID: 2100000, guid: 352dcdf1f6aafa64e9336f48675e4fce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh1670596807Mat
+    second: {fileID: 2100000, guid: 7477f6a723910de4494d403ae99439cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh1684982091Mat
+    second: {fileID: 2100000, guid: a58997891b798f848acabc7d13f4a920, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh1759808986Mat
+    second: {fileID: 2100000, guid: 69dbfa3edaa1b9648b37bbba68421e0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh2092959116Mat
+    second: {fileID: 2100000, guid: 54bc43bbff043bc45afaefe9baef2203, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh293510104Mat
+    second: {fileID: 2100000, guid: 6225c5005132a3c4aa87362fe9bbd219, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh319395727Mat
+    second: {fileID: 2100000, guid: 6e7392faa45db13439e7ae4a34c76f40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: mesh60828802Mat
     second: {fileID: 2100000, guid: e806ac5810e4e08449f440051f79703d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh722622459Mat
+    second: {fileID: 2100000, guid: 4378dfa3041dfdb47ad458cd4d48ec59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh722650972Mat
+    second: {fileID: 2100000, guid: e92098e0892e9a841bfa9ea563792405, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mesh734119244Mat
+    second: {fileID: 2100000, guid: abaa525aef0b53f4d993e32198d6efde, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
