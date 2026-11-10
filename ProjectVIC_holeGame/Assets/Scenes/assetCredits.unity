@@ -826,7 +826,8 @@ MonoBehaviour:
     Don Carson [CC-BY] via Poly Pizza\n\nZOLTAR by Don Carson [CC-BY] via Poly Pizza\n\nStreet
     barrier by Boogaard53 [CC-BY] via Poly Pizza\n\nTree by Quaternius\n\nPine Trees
     by Quaternius\n\nCoffee cup by Poly by Google [CC-BY] via Poly Pizza\n\nCoffee
-    Machine by J-Toastie [CC-BY] via Poly \n\nMug by MilkAndBanana\n\n\n"
+    Machine by J-Toastie [CC-BY] via Poly \n\nMug by MilkAndBanana\n\nThe Office
+    Pack by dook [CC-BY] via Poly Pizza\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1068,7 +1069,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 866407936}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.755731
+  m_Size: 0.7017498
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
