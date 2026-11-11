@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.LowLevelPhysics2D;
 
 public class snakeMovement : MonoBehaviour
 {
@@ -12,14 +13,14 @@ public class snakeMovement : MonoBehaviour
     [SerializeField] GameObject snakeBody;
     [SerializeField] GameObject snakeHead;
     public List<Transform> segments = new List<Transform>();
-    public Queue<Vector2> positionHistory = new Queue<Vector2>();
+    [SerializeField] Queue<Vector2> positionHistory = new Queue<Vector2>();
     private float movementCooldown = 0.3f; // Adjust for speed
     private float timeSinceLastMove = 0f;
     private int initialLength = 3;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 direction = Vector2.up;
-    private bool canCollide = false;
+    private bool inputMadeThisFrame = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,16 +28,31 @@ public class snakeMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // Adds the head to the segments list
         segments.Add(transform);
+
         // Adds three initial segments
-        for(int i = 0; i < initialLength; i++)
+        for (int i = 0; i < initialLength; i++)
         {
-            Grow();
+            Transform newSegment = Instantiate(snakeBody.transform);
+            newSegment.name = i.ToString();
+            newSegment.position = new Vector3(0.0f, -i - 1, 0.0f);
+            segments.Add(newSegment);
         }
-        
+
+        // Pre-populate position history with initial positions (tail to head)
+        // This prevents segments from jumping on the first frame
+        positionHistory.Clear();
+        for (int j = segments.Count - 1; j >= 0; j--)
+        {
+            positionHistory.Enqueue(segments[j].position);
+        }
+
+        segments[1].GetComponent<BoxCollider2D>().enabled = false;
     }
 
     void Update()
     {
+        if (inputMadeThisFrame)
+            return;
         // Move up
         if (Input.GetKeyDown(KeyCode.W) && direction != Vector2.down)
         {
@@ -44,34 +60,34 @@ public class snakeMovement : MonoBehaviour
             moveInput = Vector2.up;
             rotationOffset = 0f;
             transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
-            //rb.MoveRotation(rotationOffset);
+            inputMadeThisFrame = true;
         }
         // Move down
-        if (Input.GetKeyDown(KeyCode.S) && direction != Vector2.up)
+        else if (Input.GetKeyDown(KeyCode.S) && direction != Vector2.up)
         {
             direction = Vector2.down;
             moveInput = Vector2.down;
             rotationOffset = 180f;
             transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
-            //rb.MoveRotation(rotationOffset);
+            inputMadeThisFrame = true;
         }
         // Move left
-        if (Input.GetKeyDown(KeyCode.A) && direction != Vector2.right)
+        else if (Input.GetKeyDown(KeyCode.A) && direction != Vector2.right)
         {
             direction = Vector2.left;
             moveInput = Vector2.left;
             rotationOffset = 90f;
             transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
-            //rb.MoveRotation(rotationOffset);
+            inputMadeThisFrame = true;
         }
         // Move right
-        if (Input.GetKeyDown(KeyCode.D) && direction != Vector2.left)
+        else if (Input.GetKeyDown(KeyCode.D) && direction != Vector2.left)
         {
             direction = Vector2.right;
             moveInput = Vector2.right;
             rotationOffset = -90f;
             transform.rotation = Quaternion.Euler(0, 0, rotationOffset);
-            //rb.MoveRotation(rotationOffset);
+            inputMadeThisFrame = true;
         }
     }
     private void FixedUpdate()
@@ -89,14 +105,16 @@ public class snakeMovement : MonoBehaviour
 
             positionHistory.Enqueue(transform.position);
             timeSinceLastMove = 0f;
+            inputMadeThisFrame = false;
         }
 
         // Body segments follow the position history
         for (int i = 1; i < segments.Count; i++)
         {
-            if (positionHistory.Count > i - 1)
+            // Each segment follows the head's position from i moves ago
+            if (positionHistory.Count >= i)
             {
-                segments[i].position = positionHistory.ElementAt(i - 1);
+                segments[i].position = positionHistory.ElementAt(positionHistory.Count - i);
             }
         }
 
@@ -108,14 +126,6 @@ public class snakeMovement : MonoBehaviour
 
     }
     
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Body"))
-        {
-            canCollide = true;
-        }
-    }
-   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
@@ -135,26 +145,21 @@ public class snakeMovement : MonoBehaviour
             Grow();
             spawnFoodScript.numberOfSpawned--;
         }
-        if (canCollide)
+        if (collision.gameObject.CompareTag("Body"))
         {
-            if (collision.gameObject.CompareTag("Body"))
-            {
-                Debug.Log("Collided with self");
-                Destroy(gameObject);
-                UnityEngine.SceneManagement.SceneManager.LoadScene("gameOver");
-            }
+            Debug.Log("Collided with self");
+            Destroy(gameObject);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("gameOver");
         }
-
     }
 
     public void Grow()
     {
-        // Creates a new segment upon consumption of a fruit
+        // New segment starts at the position of the last segment in the chain
         Transform newSegment = Instantiate(snakeBody.transform);
-        // Sets the new position to that of the one in front of it (the * 2f at the end is me trying to make them more spaced apart)
-        newSegment.position = segments[0].position;
-        // Add to the list of segments
-        segments.Add(newSegment);
+        newSegment.position = segments[segments.Count - 1].position;
 
+        segments.Add(newSegment);
+        newSegment.name = segments.IndexOf(newSegment).ToString();
     }
 }
