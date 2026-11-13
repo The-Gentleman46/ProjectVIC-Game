@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 78343892}
   - component: {fileID: 78343891}
   m_Layer: 5
-  m_Name: Peach (1)
+  m_Name: Bug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5276924083986214493, guid: 7630980f61b94f443b867122166b6a1b, type: 3}
+  m_Sprite: {fileID: -4100890550483170467, guid: e85c9765080d525458fdb1370a8ac3e6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 429037258}
   - component: {fileID: 429037257}
   m_Layer: 5
-  m_Name: yellowBanana
+  m_Name: Worm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,8 +273,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -388, y: 155}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -388, y: 172.5}
+  m_SizeDelta: {x: 100, y: 135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &429037257
 MonoBehaviour:
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -427827616261672139, guid: 7630980f61b94f443b867122166b6a1b, type: 3}
+  m_Sprite: {fileID: 2865906195106238846, guid: 9c3cdcaf0ee87f441bfd34d842b82fc0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2525,7 +2525,7 @@ GameObject:
   - component: {fileID: 1517019165}
   - component: {fileID: 1517019164}
   m_Layer: 5
-  m_Name: Peach
+  m_Name: spamMail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2547,8 +2547,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 263, y: 272}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 261.3678, y: 258.1236}
+  m_SizeDelta: {x: 135, y: 109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1517019164
 MonoBehaviour:
@@ -2570,7 +2570,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5947461365793208988, guid: 7630980f61b94f443b867122166b6a1b, type: 3}
+  m_Sprite: {fileID: -7043237222134773862, guid: 9b0c5c3672c9c0f49a22aa31710f79a7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
