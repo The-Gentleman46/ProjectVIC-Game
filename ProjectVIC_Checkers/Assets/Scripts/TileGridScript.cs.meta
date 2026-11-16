@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b9a839a8a8e74c445810555f19266327
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tilePrefab: {fileID: 8876141657783457821, guid: 0398937dd29de1b40bd96fa75b244774, type: 3}
+  - blackCheckerPrefab: {fileID: 5346741583834274173, guid: 55fa23da051ec874ab8970a7beca4f45, type: 3}
+  - whiteCheckerPrefab: {fileID: -5901195533328578204, guid: 39c29308650b3e643bcfaf64396acb88, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
