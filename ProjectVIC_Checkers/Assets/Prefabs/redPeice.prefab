@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8705216175406802638}
   - component: {fileID: -5901195533328578204}
   m_Layer: 0
-  m_Name: WhitePeice
+  m_Name: redPeice
   m_TagString: WhitePiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5280183678821667483, guid: 38a30c29123cde842a5093b7e4126afb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 515869284420375901, guid: f9908d7fa96d8fa418198daabc3593eb, type: 3}
+  m_Color: {r: 0.91372555, g: 0.31764707, b: 0.3137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
