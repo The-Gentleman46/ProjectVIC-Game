@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -42,13 +43,13 @@ public class TileMovement : MonoBehaviour
      */
     private void OnEnable()
     {
-        clicker.OnPieceClicked.AddListener(OnTileClicked); 
+        clicker.OnPieceClicked.AddListener(OnTileClicked);
     }
 
     // Unsubscribe from the OnPieceClicked event when the script is disabled
     private void OnDisable()
     {
-        clicker.OnPieceClicked.RemoveListener(OnTileClicked); 
+        clicker.OnPieceClicked.RemoveListener(OnTileClicked);
     }
 
     // When a tile is clicked, check if it's a valid move or if it's the player's own piece
@@ -69,11 +70,11 @@ public class TileMovement : MonoBehaviour
         if (_currentTile.isOccupied && _currentTile.checker.owner == turn)
         {
             ClearHighlights();
-            
+
             _selectedTile = _currentTile;
-            
+
             _validMoveTiles = GetValidMoves(_currentTile);
-            
+
             foreach (Tile tile in _validMoveTiles)
             {
                 tile.GetComponent<SpriteRenderer>().color = Color.yellow;
@@ -84,59 +85,75 @@ public class TileMovement : MonoBehaviour
     // Get all valid moves for the selected piece, including jumps over opponent pieces
     private List<Tile> GetValidMoves(Tile currentTile)
     {
+        // To make multi-jumps availible, make a recursive function that has the current tile, a list of tiles that you can move to, 
+        // and a hashset of tiles to mark what pieces were captured
         List<Tile> validMoves = new List<Tile>();
         Checker piece = currentTile.checker;
         int col = currentTile.coord.x;
         int row = currentTile.coord.y;
+        int left = -1;
+        int right = 1;
 
         // For regular pieces: only move forward
         // For kings: move forward AND backward
-        int[] directions = piece.isKing ? new int[] { -1, 1 } : new int[] { piece.type == 
-            Checker.PieceType.Black ? 1 : -1 };
+        int[] directions = piece.isKing 
+            ? new int[] { -1, 1 } 
+            : new int[] { piece.type == Checker.PieceType.Black 
+            ? 1 
+            : -1 };
 
         foreach (int direction in directions)
         {
-            Vector2Int[] diagonalOffsets = new Vector2Int[]
+            Tile[] targetTiles = {
+
+                getNextTile(currentTile, left, direction),
+                getNextTile(currentTile, right, direction)
+
+                };
+            foreach (Tile tile in targetTiles)
             {
-                new Vector2Int(-1, direction),
-                new Vector2Int(1, direction)
-            };
-            
-            foreach (Vector2Int offset in diagonalOffsets)
-            {
-                int newCol = col + offset.x;
-                int newRow = row + offset.y;
-                
-                if (newCol >= 0 && newCol < tileGrid.numCol && newRow >= 0 && newRow < 
-                    tileGrid.numRow)
+                // If not occupied, then its a space directly next to the current one and allows for movement there
+                if (!tile.isOccupied)
                 {
-                    Tile targetTile = tileGrid.GetTile(newCol, newRow);
-                    
-                    if (!targetTile.isOccupied)
-                    {
-                        validMoves.Add(targetTile);
-                    }
-                    else if (targetTile.checker.owner != turn)
-                    {
-                        int jumpCol = newCol + offset.x;
-                        int jumpRow = newRow + offset.y;
-                        
-                        if (jumpCol >= 0 && jumpCol < tileGrid.numCol && jumpRow >= 0 && jumpRow 
-                            < tileGrid.numRow)
-                        {
-                            Tile jumpTile = tileGrid.GetTile(jumpCol, jumpRow);
-                            
-                            if (!jumpTile.isOccupied)
-                            {
-                                validMoves.Add(jumpTile);
-                            }
-                        }
-                    }
+                    validMoves.Add(tile);
                 }
+                // If its occupied and t
+                else if (tile.checker.owner != piece.owner && tile.coord.x < currentTile.coord.x)
+                {
+                    Tile newTile = getNextTile(tile, left, (direction < 0) ? direction: direction);
+                    
+                    if (!newTile.isOccupied)
+                        validMoves.Add(newTile);
+
+                    
+                }
+                else if(tile.checker.owner != piece.owner && tile.coord.x > currentTile.coord.x)
+                {
+                    Tile newTile = getNextTile(tile, right, (direction < 0) ? direction : direction);
+
+                    if(!newTile.isOccupied)
+                        validMoves.Add(newTile);
+
+                }
+                
             }
+            
         }
-        
+
         return validMoves;
+    }
+
+    private Tile getNextTile(Tile tile, int directionX, int directionY)
+    {
+
+        int col = tile.coord.x + directionX;
+        int row = tile.coord.y + directionY;
+        
+        Tile moveTile = tileGrid.GetTile(col, row);
+
+        if (col >= 0 && col < tileGrid.numCol && row >= 0 && row < tileGrid.numRow)
+            return moveTile;
+        return null;
     }
 
     /* Move the piece from the selected tile to the target tile, handle captures, and check for 

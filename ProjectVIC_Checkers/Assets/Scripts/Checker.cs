@@ -20,4 +20,6 @@ public class Checker : MonoBehaviour
 
     // Indicates if the piece has been promoted to a king
     public bool isKing = false;
+
+    
 }
